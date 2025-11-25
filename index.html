@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Registration</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-decor" aria-hidden="true">
+      <div class="grid-overlay"></div>
+      <div class="gradient accent-one"></div>
+      <div class="gradient accent-two"></div>
+      <div class="orbs">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+        <span class="orb orb-4"></span>
+      </div>
+      <div id="particleLayer"></div>
+    </div>
+
+    <!-- Theme toggle satisfies the light/dark requirement -->
+    <button id="themeToggle" aria-label="Toggle color theme">
+      <span class="theme-icon sun" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="5"></circle>
+          <g>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </g>
+        </svg>
+      </span>
+      <span class="theme-icon moon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 14.5A9 9 0 0 1 9.5 3 7 7 0 1 0 21 14.5z"></path>
+        </svg>
+      </span>
+      <span class="sr-only">Toggle theme</span>
+    </button>
+
+    <main class="card" id="formCard">
+      <header>
+        <h1>Join Our Community</h1>
+        <p>Please fill in the details below to get started.</p>
+      </header>
+
+      <!-- Form with required fields -->
+      <form id="registrationForm" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            autocomplete="name"
+            required
+          />
+          <small class="error" id="nameError"></small>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="john@example.com"
+            autocomplete="email"
+            required
+          />
+          <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="field password-field">
+          <label for="password">Password</label>
+          <div class="password-input">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Secure password"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              class="eye-button"
+              aria-label="Show password"
+              aria-pressed="false"
+              data-visible="false"
+            >
+              <svg
+                class="eye-icon eye-open"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 5C6.5 5 2 10 2 12s4.5 7 10 7 10-5 10-7-4.5-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
+                />
+              </svg>
+              <svg
+                class="eye-icon eye-closed"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4.2 3 3 4.2l4 4A10 10 0 0 0 2 12c0 2 4.5 7 10 7a9.8 9.8 0 0 0 4.5-1l3.3 3.3 1.2-1.2zm6.4 6.4 4 4a4 4 0 0 1-4-4zm-5 2.4A9.9 9.9 0 0 1 6.1 9l2 2a4 4 0 0 0 4.9 4.9l1.8 1.8a8.6 8.6 0 0 1-2.8.3C8.1 18 4 13.8 4 12a8.8 8.8 0 0 1 1.6-2.2zm15.4 0a11.8 11.8 0 0 0-3.9-4.3l-2.1 2.1a4 4 0 0 1 1.5 3 4 4 0 0 1-.4 1.7l2.5 2.5c1.3-1.1 2.4-2.7 2.4-3.9z"
+                />
+              </svg>
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
+          <p class="help-text" id="passwordHelp">
+            Use 12+ characters with upper, lower, number, and special symbol.
+          </p>
+          <ul class="password-checklist" id="passwordChecklist">
+            <li data-rule="length">12+ characters</li>
+            <li data-rule="uppercase">Uppercase letter (A–Z)</li>
+            <li data-rule="lowercase">Lowercase letter (a–z)</li>
+            <li data-rule="number">Number (0–9)</li>
+            <li data-rule="special">
+              Special symbol !@#$%^&*()_+-=[]{};':"&bsol;&bsol;|,.&lt;&gt;/?
+            </li>
+          </ul>
+          <div class="strength" aria-live="polite">
+            <div class="strength-label">
+              <span>Password strength:</span>
+              <strong id="strengthValue">Weak</strong>
+            </div>
+            <div class="strength-bar">
+              <span id="strengthFill"></span>
+            </div>
+          </div>
+          <small class="error" id="passwordError"></small>
+        </div>
+
+        <button type="submit">Create Account</button>
+      </form>
+    </main>
+
+    <!-- Success message hidden until validation passes -->
+    <section class="success-card hidden" id="successMessage" aria-live="polite">
+      <div class="success-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="28"></circle>
+          <path d="m22 33 7 7 13-15" />
+        </svg>
+      </div>
+      <h2>Thank you!</h2>
+      <p id="successCopy">
+        Your submission is received. We appreciate your time.
+      </p>
+      <p class="success-note">
+        Sit tight while we get everything ready for you.
+      </p>
+      <button type="button" id="successAction">Back to form</button>
+    </section>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
