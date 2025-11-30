@@ -2,7 +2,9 @@
 
 :root {
   --bg: #f3f4f6;
-  --card-bg: rgba(255, 255, 255, 0.85);
+  --bg-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1950&q=80");
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --overlay: rgba(0, 0, 0, 0.28);
   --text: #111827;
   --muted: #6b7280;
   --accent: #2563eb;
@@ -15,7 +17,9 @@
 
 body.dark {
   --bg: #0f172a;
-  --card-bg: rgba(30, 41, 59, 0.9);
+  --bg-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80");
+  --card-bg: rgba(8, 12, 10, 0.48);
+  --overlay: rgba(0, 0, 0, 0.45);
   --text: #f1f5f9;
   --muted: #cbd5f5;
   --accent: #38bdf8;
@@ -33,6 +37,8 @@ body {
   margin: 0;
   font-family: "Geist", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: var(--bg);
+  background-image: var(--bg-image);
+  background-size: cover;
   color: var(--text);
   min-height: 100vh;
   display: grid;
@@ -41,6 +47,15 @@ body {
   transition: background 0.6s ease, color 0.6s ease;
   position: relative;
   overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 240ms ease;
 }
 
 .bg-decor {
@@ -214,7 +229,8 @@ body.dark #themeToggle .moon {
   background: var(--card-bg);
   border-radius: 24px;
   padding: 2.5rem;
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   box-shadow: var(--shadow);
   animation: floatIn 0.8s ease forwards;
   position: relative;
@@ -243,6 +259,38 @@ body.dark #themeToggle .moon {
 .card:hover::after {
   opacity: 1;
   animation: shimmerSweep 1.8s linear infinite;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -60%;
+  width: 220%;
+  height: 160%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.06) 45%,
+    rgba(255, 255, 255, 0.18) 100%
+  );
+  transform: translateX(-100%) rotate(-12deg);
+  filter: blur(10px);
+  opacity: 0.22;
+  pointer-events: none;
+  animation: sheen 4s linear infinite;
+  z-index: 1;
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-100%) rotate(-12deg);
+  }
+  50% {
+    transform: translateX(0%) rotate(-12deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(-12deg);
+  }
 }
 
 .success {
@@ -585,10 +633,12 @@ button[type="submit"]:hover::after {
   z-index: 2;
   width: min(35%, 520px);
   max-width: 520px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.32);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  backdrop-filter: blur(12px) saturate(130%);
   border-radius: 28px;
   padding: 2.75rem 2.5rem;
-  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 30px 70px rgba(2, 6, 23, 0.28);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -596,12 +646,12 @@ button[type="submit"]:hover::after {
   gap: 1rem;
   opacity: 0;
   transform: translateY(28px) scale(0.97);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition: opacity 0.55s ease, transform 0.55s ease, background 0.3s ease;
 }
 
 body.dark .success-card {
-  background: rgba(15, 23, 42, 0.92);
-  box-shadow: 0 25px 60px rgba(14, 165, 233, 0.25);
+  background: rgba(15, 23, 42, 0.36);
+  box-shadow: 0 30px 70px rgba(14, 165, 233, 0.12);
 }
 
 .success-card h2 {
