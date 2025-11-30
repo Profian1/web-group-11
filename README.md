@@ -43,7 +43,8 @@ This project provides a user-friendly registration form for joining a community.
 
 ## Live Demo
 
-Registration Form [https://profian1.github.io/web-group-11/]
+[Registration Form Live Link](https://profian1.github.io/web-group-11/)
+
 
 ## Installation
 
